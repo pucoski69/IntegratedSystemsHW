@@ -1,0 +1,57 @@
+﻿@model List<CinemaApp.Models.Ticket>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+
+    <div class="d-flex justify-content-end m-3">
+    <a class="btn btn-success" asp-controller="Tickets" asp-action="Create">Add new ticket</a>
+</div>
+<h3 class="d-flex justify-content-center">
+    Movies
+</h3>
+
+    @for (int i = 0; i < Model.Count; i++)
+    {
+        var item = Model[i];
+
+        if (i % 3 == 0)
+        {
+            @:<div class="row">
+            }
+
+
+            <div class="col-md-3 m-4">
+                <div class="card" style="width: 18rem; height: 55rem;">
+                    <img class="card-img-top" src="@item.TicketImage" style="height: 50%" alt="Image for product!" />
+
+                    <div class="card-body">
+                        <h3 class="card-title">@item.TicketName</h3>
+                        <p class="card-text">@item.TicketDescription</p>
+                        <p class="card-text">@item.SelectedGenre</p>
+                        <p class="card-text"><span style="font-weight: bold">Valid date: </span>@item.ValidDate</p>
+
+                        <h6>Price: @item.TicketPrice denars</h6>
+                    </div>
+                    
+
+                    <div class="card-footer">
+                        <a asp-controller="Tickets" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edit</a>
+                        <a asp-controller="Tickets" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+            if (i % 3 == 2)
+            {
+            @:</div>
+        }
+    }
+
+</div>
